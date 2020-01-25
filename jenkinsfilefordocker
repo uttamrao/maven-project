@@ -2,6 +2,10 @@ node{
 stage ('scm checkout') {
 git 'https://github.com/uttamrao/maven-project.git'
 }
+stage ('package stage') {
+sh label: '', script: 'mvn clean package '
+
+}
 }
 
 
