@@ -12,4 +12,7 @@ sh label: '', script: 'mvn clean package '
 Prakash Ethans Pimple Saudagar
 
 }
+stage ('docker image build') {
+sh 'docker build -t pkw0301/prakash-app:1.0.0 .'
+}
 }
