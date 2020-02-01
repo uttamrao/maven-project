@@ -9,12 +9,17 @@ sh label: '', script: 'mvn clean package '
 stage ('docker image build') {
 sh 'docker build -t abhoyar9/prakash-app:1.0.0 .'
 }
-
 stage ('Push Docker image to DockerHub') {
 withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
 sh "docker login -u abhoyar9 -p ${dockerhub}"
 }
 sh 'docker push abhoyar9/prakash-app:1.0.0'
+}
+stage ('Deploy to Dev') {
+def dockerRun = 'docker run -d -p 9000:8080 --name my-tomcat-app abhoyar9/prakash-app:1.0.0'
+sshagent(['deploy-to-dev-docker']) {
+sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.18.142 ${dockerRun}"
+}
 }
 }
 
