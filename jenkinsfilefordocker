@@ -7,7 +7,7 @@ sh label: '', script: 'mvn clean package '
 
 }
 stage ('docker image build') {
-sh 'docker build -t abhoyar9/prakash-app:1.0.0 .'
+sh 'docker build -t abhoyar9/prakash-app1'
 }
 stage ('Push Docker image to DockerHub') {
 withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
