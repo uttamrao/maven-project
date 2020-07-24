@@ -16,7 +16,7 @@ sh "docker login -u abhoyar9 -p ${dockerhub1}"
 sh 'docker push abhoyar9/prakash-app:1.0.0'
 }
 stage ('Deploy to Dev') {
-def dockerRun = 'docker run -d -p 9010:8080 --name my-tomcat-app14 abhoyar9/prakash-app:1.0.0'
+def dockerRun = 'docker run -d -p 9011:8080 --name my-tomcat-app15 abhoyar9/prakash-app:1.0.0'
 sshagent(['amit']) {
 sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.39.151 ${dockerRun}"
 }
